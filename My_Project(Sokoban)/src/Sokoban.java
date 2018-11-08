@@ -12,7 +12,7 @@
 
 	    private void initialUI() {
 	        
-	        Board board = new Board();
+	    	Soko board = new Soko();
 	        add(board);
 
 	        setTitle("Sokoban");

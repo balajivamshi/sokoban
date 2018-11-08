@@ -8,7 +8,7 @@
 	    public Wall(int m, int n) {
 	        super(m, n);
 	        
-	        initWall();
+	        initWall();  
 	    }
 	    
 	    private void initWall() {

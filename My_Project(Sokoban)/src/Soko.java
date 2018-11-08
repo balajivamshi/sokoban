@@ -4,18 +4,16 @@
 	import java.awt.event.KeyEvent;
 	import java.util.ArrayList;
 	import javax.swing.JPanel;
-
-	public class Board extends JPanel {
-
+	import javax.swing.JOptionPane;
+	public class Soko extends JPanel {
 	    private final int OFFSET = 30;
 	    private final int SPACE = 20;
 	    private final int LEFT_COLLISION = 1;
 	    private final int RIGHT_COLLISION = 2;
 	    private final int TOP_COLLISION = 3;
 	    private final int BOTTOM_COLLISION = 4;
-
 	    private ArrayList<Wall> walls;
-	    private ArrayList<Baggage> baggs;
+	    private ArrayList<Boxes> baggs;
 	    private ArrayList<Area> areas;
 	    
 	    private Player soko;
@@ -25,19 +23,19 @@
 	    private boolean isCmpltd = false;
 
 	    private String level
-	            = "    ######\n"
-	            + "    ##   #\n"
-	            + "    ##$  #\n"
-	            + "  ####  $##\n"
-	            + "  ##  $ $ #\n"
-	            + "#### # ## #   ######\n"
-	            + "##   # ## #####  ..#\n"
-	            + "## $  $          ..#\n"
-	            + "###### ### #@##  ..#\n"
-	            + "    ##     #########\n"
-	            + "    ########\n";
+	            = "##############\n"
+	            + "### @    #   #\n"
+	            + "##       #   #\n"
+	            + "##       ##  #\n"
+	            + "##     #   $ #\n"
+	            + "#####        #\n"
+	            + "## $   #  #  #\n"
+	            + "##   $   ## $#\n"
+	            + "####     ##..#\n"
+	            + "##       ##..#\n"
+	            + "##############\n";
 
-	    public Board() {
+	    public Soko() {
 
 	        initBoard();
 	    }
@@ -64,7 +62,7 @@
 	        int y = OFFSET;
 
 	        Wall wall;
-	        Baggage b;
+	        Boxes b;
 	        Area a;
 
 	        for (int k = 0; k < level.length(); k++) {
@@ -90,7 +88,7 @@
 	                    break;
 
 	                case '$':
-	                    b = new Baggage(x, y);
+	                    b = new Boxes(x, y);
 	                    baggs.add(b);
 	                    x += SPACE;
 	                    break;
@@ -120,7 +118,7 @@
 
 	    private void Buildworld(Graphics g) {
 
-	        g.setColor(new Color(250, 240, 170));
+	        g.setColor(new Color( 0, 255, 0));
 	        g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
 	        ArrayList<Actor> world = new ArrayList<>();
@@ -134,7 +132,7 @@
 
 	            Actor item = world.get(i);
 
-	            if (item instanceof Player || item instanceof Baggage) {
+	            if (item instanceof Player || item instanceof Boxes) {
 	                
 	                g.drawImage(item.getImage(), item.M() + 2, item.N() + 2, this);
 	            } else {
@@ -144,8 +142,9 @@
 
 	            if (isCmpltd) {
 	                
-	                g.setColor(new Color(0, 0, 0));
-	                g.drawString("Completed", 25, 20);
+	                g.setColor(new Color(64, 64, 64));
+	               JOptionPane.showMessageDialog(null,"AWK!!...Game Over");
+	               System.exit(1);
 	            }
 
 	        }
@@ -316,13 +315,13 @@
 	                
 	                for (int i = 0; i < baggs.size(); i++) {
 
-	                    Baggage bag = baggs.get(i);
+	                	Boxes bag = baggs.get(i);
 
 	                    if (soko.isLftColision(bag)) {
 
 	                        for (int j = 0; j < baggs.size(); j++) {
 	                            
-	                            Baggage item = baggs.get(j);
+	                        	Boxes item = baggs.get(j);
 	                            
 	                            if (!bag.equals(item)) {
 	                                
@@ -347,13 +346,13 @@
 	                
 	                for (int i = 0; i < baggs.size(); i++) {
 
-	                    Baggage bag = baggs.get(i);
+	                	Boxes bag = baggs.get(i);
 	                    
 	                    if (soko.isRghtColision(bag)) {
 	                        
 	                        for (int j = 0; j < baggs.size(); j++) {
 
-	                            Baggage item = baggs.get(j);
+	                        	Boxes item = baggs.get(j);
 	                            
 	                            if (!bag.equals(item)) {
 	                                
@@ -377,13 +376,13 @@
 	                
 	                for (int k = 0; k < baggs.size(); k++) {
 
-	                    Baggage bag = baggs.get(k);
+	                	Boxes bag = baggs.get(k);
 	                    
 	                    if (soko.istopcollsion(bag)) {
 	                        
 	                        for (int l = 0; l < baggs.size(); l++) {
 
-	                            Baggage item = baggs.get(l);
+	                        	Boxes item = baggs.get(l);
 
 	                            if (!bag.equals(item)) {
 	                                
@@ -408,13 +407,13 @@
 	                
 	                for (int k = 0; k < baggs.size(); k++) {
 
-	                    Baggage bag = baggs.get(k);
+	                	Boxes bag = baggs.get(k);
 	                    
 	                    if (soko.isBottomCollision(bag)) {
 	                        
 	                        for (int l = 0; l < baggs.size(); l++) {
 
-	                            Baggage item = baggs.get(l);
+	                        	Boxes item = baggs.get(l);
 	                            
 	                            if (!bag.equals(item)) {
 	                                
@@ -450,7 +449,7 @@
 
 	        for (int k = 0; k< No_ofBags; k++) {
 	            
-	            Baggage bag = baggs.get(k);
+	        	Boxes bag = baggs.get(k);
 	            
 	            for (int l = 0; l < No_ofBags; l++) {
 	                

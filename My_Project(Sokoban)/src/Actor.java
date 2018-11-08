@@ -1,5 +1,4 @@
 	import java.awt.Image;
-
 	public class Actor {
 
 	    private final int SPACE = 20;
